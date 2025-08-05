@@ -80,7 +80,6 @@
     "mysql": "^2.18.1",
     "node-schedule": "^2.1.1",
     "nodemon": "^1.19.2",
-    "path": "^0.12.7",
     "pinia": "^2.1.6",
     "superagent": "^8.1.2",
     "vue": "^3.3.4",
