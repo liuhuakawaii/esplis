@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "dev": "set _ENV=local&&nodemon index.js",
+    "beta": "set _ENV=beta&&nodemon index.js",
+    "prod": "set _ENV=production&&nodemon index.js",
+    "dev:mac": "_ENV=local nodemon index.js",
+    "beta:mac": "_ENV=beta nodemon index.js",
+    "prod:mac": "_ENV=production nodemon index.js",
     "prepare": "husky install",
     "lint": "eslint --quiet --ext js,vue .",
     "lint:fix": "eslint --fix --ext js,vue ."

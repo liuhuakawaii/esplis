@@ -33,4 +33,5 @@ module.exports = (app) => {
   }
   // 覆盖并加载 config 配置
   app.config = Object.assign({}, defaultConfig, envConfig);
+  console.log(app.config, '-cofig-')
 }

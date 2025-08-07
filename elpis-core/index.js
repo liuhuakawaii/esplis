@@ -32,8 +32,7 @@ module.exports = {
     app.baseDir = process.cwd();
 
     // 业务文件路径
-    app.businessPath = path.resolve(app.baseDir, `${sep}app`);
-
+    app.businessPath = path.resolve(app.baseDir, `.${sep}app`);
     // 初始化环境配置
     app.env = env();
     console.log(`-- [start] env: ${app.env.get()} --`);
@@ -64,7 +63,7 @@ module.exports = {
 
     // 注册全局中间件
     try {
-      require(path.resolve(app.businessPath, `middleware.js`))(app);
+      require(`${app.businessPath}${sep}middleware.js`)(app);
       console.log(`-- [start] load globalMiddleware done --`);
     } catch (error) {
       console.error(`[exception] global middleware error: ${error.message}`);
