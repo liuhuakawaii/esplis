@@ -1,5 +1,6 @@
 module.exports = (app) => {
-  return class ProjectController {
+  const BaseController = require('./base')(app);
+  return class ProjectController extends BaseController {
     /**
      * 获取项目列表
      * @param {Object} ctx 上下文
@@ -8,12 +9,14 @@ module.exports = (app) => {
     async getList(ctx, next) {
       const { project: projectService } = app.service;
       const list = await projectService.getList();
-      ctx.status = 200;
-      ctx.body = {
-        success: true,
-        data: list,
-        metadata: {}
-      };
+      this.success(ctx, list);
+    }
+
+    async getList2(ctx, next) {
+      console.log(ctx.request.body, '----')
+      const { project: projectService } = app.service;
+      const list = await projectService.getList2();
+      this.success(ctx, list);
     }
   }
 }

@@ -14,6 +14,7 @@
   <input id="env" type="text" value="{{ env }}" style="display: none;">
   <input id="options" type="text" value="{{ options }}" style="display: none;">
   <button id="btn" onclick="handleClick()">发送请求</button>
+  <button id="btn2" onclick="handleClick2()">发送Post请求</button>
 </body>
 <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
 <script type="text/javascript">
@@ -27,6 +28,18 @@
 
   const handleClick = () => {
       axios.get('/api/project/list').then(res => {
+        console.log(res);
+      }).catch(err => {
+        console.log(err);
+      });
+    };
+
+    const handleClick2 = () => {
+      axios.request({
+        url: '/api/project/list2',
+        method: 'post',
+        data:{a:1,b:2}
+      }).then(res => {
         console.log(res);
       }).catch(err => {
         console.log(err);
