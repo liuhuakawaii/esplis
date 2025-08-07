@@ -29,4 +29,7 @@ module.exports = (app) => {
 
   // 签名合法性校验
   app.use(app.middlewares.apiSignVerify);
+
+  // 参数合法性校验
+  app.use(app.middlewares.apiParamsVerify);
 }
