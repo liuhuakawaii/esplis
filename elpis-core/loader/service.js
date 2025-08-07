@@ -31,8 +31,8 @@ module.exports = (app) => {
     for (let i = 0, len = names.length; i < len; i++) {
       const key = names[i];
       if (i === len - 1) {
-        const ServiceModule = require(file);
-        tempService[key] = new ServiceModule(app);
+        const ServiceModule = require(file)(app);
+        tempService[key] = new ServiceModule();
       } else {
         tempService[key] ??= {};
         tempService = tempService[key];

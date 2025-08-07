@@ -31,13 +31,13 @@ module.exports = (app) => {
     for (let i = 0, len = names.length; i < len; i++) {
       const key = names[i];
       if (i === len - 1) {
-        const ControllerModule = require(file);
-        tempController[key] = new ControllerModule(app);
+        const ControllerModule = require(file)(app);
+        tempController[key] = new ControllerModule();
       } else {
         tempController[key] ??= {};
         tempController = tempController[key];
       }
     }
   });
-  app.controllers = controllers;
+  app.controller = controllers;
 }
