@@ -17,7 +17,6 @@ module.exports = (app) => {
   const extendPath = path.resolve(app.businessPath, `extend`);
   const fileList = glob.sync(path.join(extendPath, '**/*.{js,ts}'));
 
-  const extend = {};
   fileList.forEach(file => {
     const relative = path.relative(extendPath, file); // => custom-extend
     let name = relative.replace(/\.js$/, '');
@@ -29,7 +28,7 @@ module.exports = (app) => {
         return;
       }
     }
-    extend[name] = require(file)(app);
+
+    app[name] = require(file)(app);
   });
-  app.extend = extend;
 }

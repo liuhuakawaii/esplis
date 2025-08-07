@@ -17,6 +17,7 @@
   <button id="btn2" onclick="handleClick2()">发送Post请求</button>
 </body>
 <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-md5@0.8.3/src/md5.min.js"></script>
 <script type="text/javascript">
   try {
     window.env = document.getElementById('env').value;
@@ -27,7 +28,17 @@
   }
 
   const handleClick = () => {
-      axios.get('/api/project/list').then(res => {
+    const signKey = 'dbaskb45s3afaf8v2a0asd1a'
+    const st = Date.now()
+      axios.request({
+        url: '/api/project/list',
+        method: 'get',
+        data:{a:1,b:2},
+        headers: { 
+          s_sign:md5(`${signKey}_${st}`), 
+          s_t:st 
+        }
+      }).then(res => {
         console.log(res);
       }).catch(err => {
         console.log(err);

@@ -23,4 +23,10 @@ module.exports = (app) => {
     formLimit: '1000mb',
     enableTypes: ['json', 'form', 'text'],
   }));
+
+  // 错误处理
+  app.use(app.middlewares.errorHandler);
+
+  // 签名合法性校验
+  app.use(app.middlewares.apiSignVerify);
 }
