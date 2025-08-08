@@ -6,7 +6,7 @@ module.exports = (app) => {
      * @param {Object} next 
      */
     async renderPage(ctx, next) {
-      await ctx.render(`output/entry.${ctx.params.page}`, {
+      await ctx.render(`dist/entry.${ctx.params.page}`, {
         title: 'ENTRY PAGE1 xxx',
         name: app.options?.name,
         env: app.env.get(),
