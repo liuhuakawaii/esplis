@@ -30,32 +30,32 @@
   const handleClick = () => {
     const signKey = 'dbaskb45s3afaf8v2a0asd1a'
     const st = Date.now()
-      axios.request({
-        url: '/api/project/list',
-        method: 'get',
-        params:{ a:1, project_key:1 },
-        headers: { 
-          s_sign:md5(`${signKey}_${st}`), 
-          s_t:st 
-        }
-      }).then(res => {
-        console.log(res);
-      }).catch(err => {
-        console.log(err);
-      });
-    };
+    axios.request({
+      url: '/api/project/list',
+      method: 'get',
+      params: { a: 1, project_key: 1 },
+      headers: {
+        s_sign: md5(`${signKey}_${st}`),
+        s_t: st
+      }
+    }).then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    });
+  };
 
-    const handleClick2 = () => {
-      axios.request({
-        url: '/api/project/list2',
-        method: 'post',
-        data:{a:1,b:2}
-      }).then(res => {
-        console.log(res);
-      }).catch(err => {
-        console.log(err);
-      });
-    };
+  const handleClick2 = () => {
+    axios.request({
+      url: '/api/project/list2',
+      method: 'post',
+      data: { a: 1, b: 2 }
+    }).then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    });
+  };
 </script>
 
 </html>
