@@ -1,7 +1,21 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/static/normallize.css"><link rel="icon" href="/static/logo.png" type="image/x-icon"><title>{{title}}</title><link href="/dist/prod/css/entry.page2_4bc544cc.bundle.css" rel="stylesheet"></head><body><div id="root"></div><input id="env" value="{{ env }}" style="display: none;"> <input id="options" value="{{ options }}" style="display: none;"><script defer="defer" src="/dist/prod/js/runtime_bbf9bb4b.bundle.js"></script><script defer="defer" src="/dist/prod/js/vendor_abd1e46b.bundle.js"></script><script defer="defer" src="/dist/prod/js/entry.page2_49bc444f.bundle.js"></script></body><script>try {
-    window.env = document.getElementById('env').value;
-    const options = document.getElementById('options').value;
-    window.options = JSON.parse(options);
-  } catch (error) {
-    console.error(error);
-  }</script></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/normallize.css">
+  <link rel="icon" href="/static/logo.png" type="image/x-icon">
+  <title>{{title}}</title>
+</head>
+
+<body>
+  <div id="root"></div>
+<script>
+  // 将字符串型 env 直接注入
+  window.env = '{{ env }}';
+  // 将 JSON 结构直接注入（保持原样，不转义），避免 HTML 实体造成 JSON.parse 出错
+  window.options = {{ options | safe }};
+</script>
+<script defer src="http://127.0.0.1:9002/public/dist/dev/js/runtime_947d2f86.bundle.js"></script><script defer src="http://127.0.0.1:9002/public/dist/dev/js/vendor_cf0d5d3a.bundle.js"></script><script defer src="http://127.0.0.1:9002/public/dist/dev/js/entry.page2_b446906c.bundle.js"></script></body>
+</html>

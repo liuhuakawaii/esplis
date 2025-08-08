@@ -1,7 +1,7 @@
 /**
  * webpack 基础配置
  */
-const glob = require('glob')
+const { globSync } = require('glob')
 const path = require('path')
 const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
@@ -9,7 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 // 仅在生产环境中使用 MiniCssExtractPlugin
 
 // 获取 app/pages 目录下所有入口文件（entry.xx.js）
-const entryFiles = glob.sync(path.join(process.cwd(), './app/pages/**/entry.*.js'))
+const entryFiles = globSync(path.join(process.cwd(), './app/pages/**/entry.*.js'))
 const pageEntries = {}
 const htmlWebpackPluginList = []
 entryFiles.forEach(item => {
@@ -58,7 +58,7 @@ module.exports = {
         type: 'asset',
         parser: {
           dataUrlCondition: {
-            maxSize: 300,
+            maxSize: 8 * 1024,
           }
         },
         generator: {

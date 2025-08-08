@@ -11,17 +11,11 @@
 
 <body>
   <div id="root"></div>
-  <input id="env" type="text" value="{{ env }}" style="display: none;">
-  <input id="options" type="text" value="{{ options }}" style="display: none;">
-</body>
-<script type="text/javascript">
-  try {
-    window.env = document.getElementById('env').value;
-    const options = document.getElementById('options').value;
-    window.options = JSON.parse(options);
-  } catch (error) {
-    console.error(error);
-  }
+<script>
+  // 将字符串型 env 直接注入
+  window.env = '{{ env }}';
+  // 将 JSON 结构直接注入（保持原样，不转义），避免 HTML 实体造成 JSON.parse 出错
+  window.options = {{ options | safe }};
 </script>
-
+</body>
 </html>

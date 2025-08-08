@@ -1,6 +1,6 @@
 const KoaRouter = require('koa-router');
 const path = require('path');
-const glob = require('glob');
+const { globSync } = require('glob');
 
 /**
  * router loader
@@ -17,7 +17,7 @@ module.exports = (app) => {
   const router = new KoaRouter();
 
   // 注册所有路由
-  const fileList = glob.sync(path.join(routerPath, '**/*.{js,ts}'));
+  const fileList = globSync(path.join(routerPath, '**/*.{js,ts}'));
   fileList.forEach(file => {
     const routerModule = require(file);
     routerModule(app, router);

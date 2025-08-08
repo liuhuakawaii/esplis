@@ -1,5 +1,5 @@
 const path = require('path');
-const glob = require('glob');
+const { globSync } = require('glob');
 const { sep } = path;
 
 /**
@@ -17,7 +17,7 @@ const { sep } = path;
  */
 module.exports = (app) => {
   const servicePath = path.resolve(app.businessPath, `service`);
-  const fileList = glob.sync(path.join(servicePath, '**/*.{js,ts}'));
+  const fileList = globSync(path.join(servicePath, '**/*.{js,ts}'));
 
   const service = {};
   fileList.forEach(file => {

@@ -1,5 +1,7 @@
 const { merge } = require('webpack-merge')
 const path = require('path')
+const webpack = require('webpack')
+const baseConfig = require('./webpack.base')
 
 /**
  *  style-loader:将 CSS 通过 JavaScript 动态插入到 <style> 标签中。
@@ -26,17 +28,35 @@ const lessLoader = {
   },
 }
 
-// 基类配置
-const baseConfig = require('./webpack.base')
+const DEV_SERVER_CONFIG = {
+  HOST: '127.0.0.1',
+  PORT: 9002,
+  HMR_PATH: '__webpack_hmr',
+  TIMEOUT: 20000,
+}
+
+Object.keys(baseConfig.entry).forEach(v => {
+  //第三方包不作为hmr入口
+  if (v !== 'vendor') {
+    baseConfig.entry[v] = [
+      // hmr 热更新入口
+      `webpack-hot-middleware/client?path=http://${DEV_SERVER_CONFIG.HOST}:${DEV_SERVER_CONFIG.PORT}/${DEV_SERVER_CONFIG.HMR_PATH}&timeout=${DEV_SERVER_CONFIG.TIMEOUT}`,
+      baseConfig.entry[v]
+    ]
+  }
+})
 
 // 开发环境配置
 const webpackConfig = merge(baseConfig, {
   mode: 'development',
+  // source-map 追踪错误
   devtool: 'eval-cheap-module-source-map',
   output: {
+    // HMR 下 hash 没意义，且生成大量不同名文件（缓存失效、落盘多、diff 不友好）
     filename: 'js/[name].js',
-    path: path.join(process.cwd(), './app/public/dist/dev'),
-    publicPath: '/dist/dev/',
+    path: path.join(process.cwd(), './app/public/dist/dev/'), //输出文件存储路径
+    publicPath: `http://${DEV_SERVER_CONFIG.HOST}:${DEV_SERVER_CONFIG.PORT}/public/dist/dev/`, // 外部资源公共路径
+    globalObject: 'this',
   },
   module: {
     rules: [
@@ -50,6 +70,17 @@ const webpackConfig = merge(baseConfig, {
       },
     ],
   },
+  plugins: [
+    // 模块热更新插件
+    new webpack.HotModuleReplacementPlugin({
+      multiStep: false,
+    }),
+  ]
 })
 
-module.exports = webpackConfig
+module.exports = {
+  // webpack 配置
+  webpackConfig,
+  // webpack-dev-server 配置,暴露给 dev.js 使用
+  DEV_SERVER_CONFIG
+}

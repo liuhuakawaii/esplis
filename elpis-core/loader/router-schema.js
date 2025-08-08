@@ -1,5 +1,5 @@
 const path = require('path');
-const glob = require('glob');
+const { globSync } = require('glob');
 
 
 /**
@@ -21,7 +21,7 @@ const glob = require('glob');
  */
 module.exports = (app) => {
   const routerSchemaPath = path.resolve(app.businessPath, `router-schema`);
-  const fileList = glob.sync(path.join(routerSchemaPath, '**/*.{js,ts}'));
+  const fileList = globSync(path.join(routerSchemaPath, '**/*.{js,ts}'));
   let routerSchema = {};
   fileList.forEach(file => {
     const exportedModule = require(file);

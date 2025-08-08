@@ -1,5 +1,5 @@
 const path = require('path');
-const glob = require('glob');
+const { globSync } = require('glob');
 
 /**
  * extend loader
@@ -15,7 +15,7 @@ const glob = require('glob');
  */
 module.exports = (app) => {
   const extendPath = path.resolve(app.businessPath, `extend`);
-  const fileList = glob.sync(path.join(extendPath, '**/*.{js,ts}'));
+  const fileList = globSync(path.join(extendPath, '**/*.{js,ts}'));
 
   fileList.forEach(file => {
     const relative = path.relative(extendPath, file); // => custom-extend
