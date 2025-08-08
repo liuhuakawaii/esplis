@@ -1,0 +1,16 @@
+[2025-08-07T19:39:00.288] [INFO] default - getList [
+  { id: 1, name: '项目1', description: '项目1描述' },
+  { id: 2, name: '项目2', description: '项目2描述' }
+]
+[2025-08-07T19:39:00.535] [INFO] default - getList [
+  { id: 1, name: '项目1', description: '项目1描述' },
+  { id: 2, name: '项目2', description: '项目2描述' }
+]
+[2025-08-07T19:39:00.704] [INFO] default - getList [
+  { id: 1, name: '项目1', description: '项目1描述' },
+  { id: 2, name: '项目2', description: '项目2描述' }
+]
+[2025-08-07T19:39:00.887] [INFO] default - getList [
+  { id: 1, name: '项目1', description: '项目1描述' },
+  { id: 2, name: '项目2', description: '项目2描述' }
+]
