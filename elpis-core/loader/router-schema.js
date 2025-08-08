@@ -24,9 +24,12 @@ module.exports = (app) => {
   const fileList = glob.sync(path.join(routerSchemaPath, '**/*.{js,ts}'));
   let routerSchema = {};
   fileList.forEach(file => {
-    routerSchema = {
-      ...routerSchema,
-      [file]: require(file)
+    const exportedModule = require(file);
+    if (exportedModule && typeof exportedModule === 'object') {
+      routerSchema = {
+        ...routerSchema,
+        ...exportedModule,
+      };
     }
   });
   app.routerSchema = routerSchema;

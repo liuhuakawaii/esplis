@@ -33,7 +33,7 @@
       axios.request({
         url: '/api/project/list',
         method: 'get',
-        data:{a:1,b:2},
+        params:{ a:1, project_key:1 },
         headers: { 
           s_sign:md5(`${signKey}_${st}`), 
           s_t:st 

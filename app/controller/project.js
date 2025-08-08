@@ -13,7 +13,6 @@ module.exports = (app) => {
     }
 
     async getList2(ctx, next) {
-      console.log(ctx.request.body, '----')
       const { project: projectService } = app.service;
       const list = await projectService.getList2();
       this.success(ctx, list);
