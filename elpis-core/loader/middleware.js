@@ -1,5 +1,5 @@
 const path = require('path');
-const glob = require('glob');
+const { globSync } = require('glob');
 const { sep } = path;
 
 /**
@@ -18,7 +18,11 @@ const { sep } = path;
 module.exports = (app) => {
   // 读取 app/middleware/**/**.js 所有文件
   const middlewarePath = path.resolve(app.businessPath, `middleware`);
-  const fileList = glob.sync(path.join(middlewarePath, '**/*.{js,ts}'));
+  const fileList = globSync('**/*.{js,ts}', {
+    cwd: middlewarePath,
+    absolute: true,
+    windowsPathsNoEscape: true,
+  });
 
   // 遍历所有文件目录，把内容加载到 app.middleware 下
   const middlewares = {};

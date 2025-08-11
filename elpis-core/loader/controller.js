@@ -1,5 +1,5 @@
 const path = require('path');
-const glob = require('glob');
+const { globSync } = require('glob');
 const { sep } = path;
 
 /**
@@ -17,7 +17,11 @@ const { sep } = path;
  */
 module.exports = (app) => {
   const controllerPath = path.resolve(app.businessPath, `controller`);
-  const fileList = glob.sync(path.join(controllerPath, '**/*.{js,ts}'));
+  const fileList = globSync('**/*.{js,ts}', {
+    cwd: controllerPath,
+    absolute: true,
+    windowsPathsNoEscape: true,
+  });
 
   const controllers = {};
   fileList.forEach(file => {

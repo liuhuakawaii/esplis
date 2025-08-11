@@ -1,6 +1,6 @@
-const KoaRouter = require('koa-router');
+const KoaRouter = require('@koa/router');
 const path = require('path');
-const glob = require('glob');
+const { globSync } = require('glob');
 
 /**
  * router loader
@@ -17,19 +17,22 @@ module.exports = (app) => {
   const router = new KoaRouter();
 
   // 注册所有路由
-  const fileList = glob.sync(path.join(routerPath, '**/*.{js,ts}'));
+  const fileList = globSync('**/*.{js,ts}', {
+    cwd: routerPath,
+    absolute: true,
+    windowsPathsNoEscape: true,
+  });
   fileList.forEach(file => {
     const routerModule = require(file);
     routerModule(app, router);
   });
 
-  // 路由兜底
-  router.get('*', async (ctx, next) => {
+  router.get('(.*)', async (ctx, next) => {
     ctx.status = 302; // 临时重定向
     ctx.redirect(`${app?.options?.homePage ?? '/'}`)
   });
 
   // 路由注册到 app 中
-  app.use(router.routes());
-  app.use(router.allowedMethods());
+  app.use(router.routes())
+    .use(router.allowedMethods());
 }
