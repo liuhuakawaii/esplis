@@ -54,8 +54,21 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             cacheDirectory: true, // 启用缓存来加速构建过程
-            presets: ['@babel/preset-env'],
-            plugins: ['@babel/plugin-transform-runtime'],
+            presets: [
+              ['@babel/preset-env', {
+                useBuiltIns: 'usage',
+                corejs: false,
+                modules: false
+              }]
+            ],
+            plugins: [
+              ['@babel/plugin-transform-runtime', {
+                helpers: true,
+                corejs: false,
+                regenerator: true,
+                useESModules: false
+              }]
+            ],
           }
         }
       },
@@ -98,6 +111,7 @@ module.exports = {
       $widgets: path.resolve(process.cwd(), './app/pages/widgets'),
       $store: path.resolve(process.cwd(), './app/pages/store'),
       $components: path.resolve(process.cwd(), './app/pages/components'),
+      $styles: path.resolve(process.cwd(), './app/pages/styles'),
     },
   },
   // 配置 webpack 在打包时，如何处理模块

@@ -1,0 +1,14 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+input::-webkit-autofill {
+  /* 解决输入框自动填充背景色问题 */
+  -webkit-box-shadow: 0 0 0 1000px #121212 inset !important;
+}
