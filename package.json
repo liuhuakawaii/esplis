@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.24.0",
+    "@koa/router": "^12.0.2",
     "ajv": "^6.10.2",
     "axios": "^1.11.0",
     "echarts": "^5.5.0",
@@ -72,7 +73,6 @@
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-nunjucks-2": "^3.0.2",
-    "@koa/router": "^12.0.0",
     "koa-static": "^5.0.0",
     "koa-useragent": "^2.0.0",
     "koa2-cors": "^2.0.6",

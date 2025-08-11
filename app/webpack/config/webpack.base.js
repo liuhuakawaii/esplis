@@ -9,7 +9,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 // 仅在生产环境中使用 MiniCssExtractPlugin
 
 // 获取 app/pages 目录下所有入口文件（entry.xx.js）
-const entryFiles = globSync(path.join(process.cwd(), './app/pages/**/entry.*.js'))
+// 注意：在 Windows 下，使用 path.join 会产生反斜杠，可能导致 glob 匹配失败
+// 因此这里使用 POSIX 风格的通配符，并通过 cwd/absolute 统一解析，确保跨平台一致
+const entryFiles = globSync('app/pages/**/entry.*.js', {
+  cwd: process.cwd(),
+  absolute: true,
+  windowsPathsNoEscape: true,
+})
 const pageEntries = {}
 const htmlWebpackPluginList = []
 entryFiles.forEach(item => {

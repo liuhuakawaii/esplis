@@ -21,7 +21,11 @@ const { globSync } = require('glob');
  */
 module.exports = (app) => {
   const routerSchemaPath = path.resolve(app.businessPath, `router-schema`);
-  const fileList = globSync(path.join(routerSchemaPath, '**/*.{js,ts}'));
+  const fileList = globSync('**/*.{js,ts}', {
+    cwd: routerSchemaPath,
+    absolute: true,
+    windowsPathsNoEscape: true,
+  });
   let routerSchema = {};
   fileList.forEach(file => {
     const exportedModule = require(file);

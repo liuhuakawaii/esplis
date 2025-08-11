@@ -17,7 +17,11 @@ const { sep } = path;
  */
 module.exports = (app) => {
   const servicePath = path.resolve(app.businessPath, `service`);
-  const fileList = globSync(path.join(servicePath, '**/*.{js,ts}'));
+  const fileList = globSync('**/*.{js,ts}', {
+    cwd: servicePath,
+    absolute: true,
+    windowsPathsNoEscape: true,
+  });
 
   const service = {};
   fileList.forEach(file => {
